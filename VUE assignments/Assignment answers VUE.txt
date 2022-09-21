@@ -1,0 +1,321 @@
+*cdn link= https://unpkg.com/vue@next
+
+=========================================
+Assignment 1 (19/9/22)
+=========================================
+1.what is  VUE.js?
+==> Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. 
+It builds on top of standard HTML, CSS and JavaScript, and provides a declarative and 
+component-based programming model that helps you efficiently develop user interfaces, 
+be it simple or complex.
+
+2.Why should we choose VUE.js?
+==>  -Enhancing static HTML without a build step
+	-Embedding as Web Components on any page
+	-Single-Page Application (SPA)
+	-Fullstack / Server-Side Rendering (SSR)
+	-Jamstack / Static Site Generation (SSG)
+	-Targeting desktop, mobile, WebGL, and even the terminal
+
+3.What is Single Page  Applications
+==>The page that handles data updates and navigation without having to reload to the page.
+
+4.Events in Vue(5  examples)
+==> *INLINE HANDLERS.
+//in app//
+    data() {
+  return {
+    count: 0
+  }
+}
+//in html//
+<button @click="count++">Add 1</button>
+<p>Count is: {{ count }}</p>
+
+*METHOD HANDLERS
+//in app//
+data() {
+  return {
+    name: 'Vue.js'
+  }
+},
+methods: {
+  greet(event) {
+    // `this` inside methods points to the current active instance
+    alert(`Hello ${this.name}!`)
+    // `event` is the native DOM event
+    if (event) {
+      alert(event.target.tagName)
+    }
+  }
+}
+
+//in html//
+<!-- `greet` is the name of the method defined above -->
+<button @click="greet">Greet</button>
+
+5.What are VUE directives (explain 5 directives)
+==> Directives are instruction for VueJS to do things in a certain way.
+v-on===clicking on button
+v-once===it will return only one constant data
+
+
+6.Example of two way binding
+==> //in html//
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello world</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+     <div id="first">
+         <h1>First VUE application</h1>
+         <h2>{{greeting}}</h2>
+
+         <h2>Person name is: {{person.name}} </h2>
+
+         <!-- we can call the function
+        we can write mathematical call
+    we can not writecomplex if else condition -->
+
+    <!-- <h3>{{1+4}} -->
+
+        <!-- using v-html directive to read the raw html -->
+        <h3 v-html="randomOutput()"></h3> 
+     </div>
+
+     <script src="./app.js"></script>
+     
+     <script src="./fetch.js"></script>
+</body>
+
+</html>
+
+//in app//
+let app = Vue.createApp({
+    data() {
+        return {
+            email: ""
+        }
+    },
+    
+    methods:{
+        // //setName(event) {
+        //     this.email=event.target.value
+        // },
+        reset(){
+            this.email=""
+        }
+    }
+})
+app.mount('#dataBinding')
+
+=====================================================
+Assignment 2 (20/9/22)
+=====================================================
+
+1.Explain v-once, v-html, v-if, v-else,
+v-show,v-bind,v-model,v-show
+
+==> //v-once- Render the element and component once only, and skip future updates.
+
+ -Does not expect expression
+
+ -Details
+
+  On subsequent re-renders, the element/component and all its children will be
+  treated as static content and skipped. This can be used to optimize update performance.
+
+//v-html- Update the element's innerHTML.
+
+Expects: string
+
+//v-if- Conditionally render an element or a template fragment based on the 
+truthy-ness of the expression value.
+
+Expects: any
+
+V-if more preror than v-for
+
+//v-else- Denote the "else block" for v-if or a v-if / v-else-if chain.
+can be used in template
+
+Does not expect expression
+
+//v-show- Toggle the element's visibility based on the truthy-ness of t
+he expression value.
+
+Expects: any
+
+//v-bind -Dynamically bind one or more attributes, or a component prop to an expression.
+
+Shorthand: : or . (when using .prop modifier)
+
+Expects: any (with argument) | Object (without argument)
+
+//v-model -Create a two-way binding on a form input element or a component.
+
+Expects: varies based on value of form inputs element or output of components
+
+Limited to:
+
+<input>
+<select>
+<textarea>
+components
+
+
+
+2.Iterate through array using v-for and display in list format (5 examples)
+==> 
+
+3.Explain computed properties
+==> 
+In-template,  expressions are very convenient, but they are meant for simple operations. 
+So we use computed properties it will maintain the hard code.
+for complex logic that includes reactive data, it is recommended to use a computed property. 
+
+4.Explain watchers
+==>we can use the watch option to trigger a function whenever a reactive property changes.
+
+in the cases where we need to perform "side effects" in reaction to state changes
+
+
+Deep Watchers-watch is shallow by default: 
+the callback will only trigger when the watched property has been assigned a new value -
+it won't trigger on nested property changes. 
+If you want the callback to fire on all nested mutations, you need to use a deep watcher:
+
+5.What is ref? why to use it?
+==>ref is a special attribute, similar to the key attribute in the v-for. 
+It allows us to obtain a direct reference to a specific DOM element or child component instance after it's mounted.
+
+6.Explain all the lifecycle methods
+==>
+LIFE CYCLE METHODS
+====================
+
+3 phases
+-----------
+1.MOUNTING
+2.UPDATING
+3.UNMOUNTING
+
+1.Mounting
+
+beforeCreate
+-------------
+Called when the instance is initialized.
+
+Called immediately when the instance is initialized, after props resolution, before processing other options such as data() or computed:
+
+created
+----------
+Called after the instance has finished processing all state-related options.
+
+Details
+
+When this hooks is called, the following have been set up: reactive data, computed properties, methods, and watchers.
+However, the mounting phase has not been started, and the $el property will not be available yet.
+
+beforeMount
+------------
+Called right before the component is to be mounted.
+
+Details
+
+When this hook is called, the component has finished setting up its reactive state, but no DOM nodes have been created yet. 
+It is about to execute its DOM render effect for the first time.
+
+This hook is not called during server-side rendering.
+
+mounted (api calls)
+----------
+Called after the component has been mounted.
+
+Details
+
+A component is considered mounted after:
+
+All of its synchronous child components have been mounted (does not include async components or components inside <Suspense> trees).
+
+Its own DOM tree has been created and inserted into the parent container. 
+Note it only guarantees that the component's DOM tree is in-document if the application's root container is also in-document.
+
+This hook is typically used for performing side effects that need access to the component's rendered DOM,
+ or for limiting DOM-related code to the client in a server-rendered application.
+
+This hook is not called during server-side rendering
+
+
+
+2.Update phase
+================
+
+beforeUpdate
+--------------
+Called right before the component is about to update its DOM tree due to a reactive state change.
+
+Details
+
+This hook can be used to access the DOM state before Vue updates the DOM.
+It is also safe to modify component state inside this hook.
+
+This hook is not called during server-side rendering.
+
+updated
+---------------
+Called after the component has updated its DOM tree due to a reactive state change.
+
+Details
+
+A parent component's updated hook is called after that of its child components.
+
+This hook is called after any DOM update of the component, 
+which can be caused by different state changes. 
+If you need to access the updated DOM after a specific state change, use nextTick() instead.
+
+This hook is not called during server-side rendering.
+
+
+3.Unmount Phase
+================
+
+beforeUnmount
+----------------
+Called right before a component instance is to be unmounted.
+
+Details
+
+When this hook is called, the component instance is still fully functional.
+
+This hook is not called during server-side rendering.
+
+unmounted
+------------------
+Called after the component has been unmounted.
+
+Details
+
+A component is considered unmounted after:
+---------------------------------------------
+All of its child components have been unmounted.
+
+All of its associated reactive effects (render effect and computed / watchers created during setup()) have been stopped.
+
+Use this hook to clean up manually created side effects such as timers, DOM event listeners or server connections.
+
+This hook is not called during server-side rendering.
+
+7.create 5 projects
+	vue create appname
+	second -app
+	third-app
+	fourth-app
+	fifth-app
+

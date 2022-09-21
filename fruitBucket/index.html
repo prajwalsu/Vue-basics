@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="fruitBucket">
+        <h1>Fruit Bucket</h1>
+        <input type="type" placeholder="enter fruits" v-model="newFruitValue"/>
+
+        <button @click="addFruit">➕</button>
+
+        <!-- using v-if and v-else -->
+
+        <p v-if="fruits.length===0"> No fruits in bucket</p>
+
+        <ul v-else>
+            <li v-for="(fruit,index) in fruits"
+            :key="index"
+            @click="removeFruit(index)">
+            index {{index}}:{{fruit}}</li>
+        </ul>
+    </div>
+
+
+    <script src="./app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="events">
+        <h1>Counter: {{counter}}</h1>
+        <!-- use v-on objective,no spaces -->
+        <button v-on:click="increment(10)">Increment</button> 
+        <button v-on:click="decrement(10)">decrement</button>
+
+        <!-- counter rendered only once -->
+        <h1 v-once>Starting Counter: {{counter}}</h1>
+
+        <!-- to stopee refreshing use directive: v-on:submit.preven-->
+        <form v-on:submit.prevent="handleSubmit">
+            <input placeholder="Enter age"/>
+            <button>Submit</button>
+        </form>
+    </div>
+    <script src="./app.js"></script>
+    
+</body>
+</html>

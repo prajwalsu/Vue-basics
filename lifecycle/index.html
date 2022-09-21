@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="lifecycle">
+        <h1>Vue refs</h1>
+        <input type="text" ref="userText" />
+        <button @click="setText">set text</button>
+        <p>Message:{{message}}</p>
+
+        <!-- To focus an input field -->
+        <input ref="email" />
+        <button @click="setFocus">click</button>
+
+    </div>
+    <script src="./app.js"></script>
+</body>
+
+</html>
