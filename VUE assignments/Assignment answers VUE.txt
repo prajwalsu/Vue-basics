@@ -319,3 +319,133 @@ This hook is not called during server-side rendering.
 	fourth-app
 	fifth-app
 
+==========================================
+Assignement 3 (21/9/22)
+==========================================
+
+1.What are props?
+==> “Props” is a special keyword which stands for properties.
+ It can be registered on a component to pass data from a parent component to one of its children components.
+
+2.send data from parent to child (3 ex)
+
+3.send data from child to parent(5 ex)
+
+4.How to validatte props?(3 ex)
+==>Components can specify requirements for their props, such as TYPE in React.
+ If a requirement is not met, Vue will warn you in the browser's JavaScript console.
+ This is especially useful when developing a component that is intended to be used by others.
+
+ To specify prop validations, you can provide an object with validation requirements to the props option, 
+ instead of an array of strings.     
+
+5.conditional rendering(3 ex)
+==>CONDITIONAL RENDERING
+======================
+The directive v-if 
+-------------------
+it is used to conditionally render a block. 
+The block will only be rendered if the directive's expression returns a truthy value.
+
+
+v-else
+-------
+You can use the v-else directive to indicate an "else block" for v-if
+
+A v-else element must immediately follow a v-if or a v-else-if element - otherwise it will not be recognized.
+
+v-else-if
+-----------
+The v-else-if, as the name suggests, serves as an "else if block" for v-if. 
+It can also be chained multiple times
+
+6.How  to avoid props drilling?
+
+7.Explain provide and inject?
+==> Usually, when we need to pass data from the parent to a child component, we use props.
+   If we have a large component tree, and a deeply nested component needs something from a distant ancestor component. 
+   With only props, we would have to pass the same prop across the entire parent chain:
+  
+   If there is a longer parent chain, more components would be affected along the way. This is called "props drilling" 
+                                                                                                      ------------------
+   To avoid the prop drilling we use Provide and Inject.
+
+   A parent component can serve as a dependency provider for all its descendants. 
+   Any component in the descendant tree, regardless of how deep it is, 
+   can inject dependencies provided by components up in its parent chain.
+
+8.Receipe app final date: 23 sept 2022
+
+9.Revise all the previous concepts
+
+==========================================
+Assignment 4 (22/9/22)
+==========================================
+1.What are dynamic components and how to create dynamic components?
+==>Vue dynamic components enable users to switch between two or more components without routing, 
+and even retain the state of data when switching back to the initial component. 
+The central idea is to let users dynamically mount and unmount components in the user interface without using routers.
+
+//code in app.vue
+
+<template>
+  <router-link to="/">Home</router-link>
+  <button @click="createComponent">Create Component</button>
+
+  <router-view></router-view>
+</template>
+
+<script>
+import { getCurrentInstance } from "vue";
+import { useRouter } from "vue-router";
+export default {
+  name: "App",
+  setup() {
+    const app = getCurrentInstance().appContext.app;
+    const router = useRouter();
+
+    const createComponent = () => {
+      // Check if the component has been alreadey registered
+      if (!app.component("NewComponent")) {
+        app.component("NewComponent", {
+          name: "NewComponent",
+          template: `
+        <div>This is a new component</div>
+        `,
+        });
+      }
+
+      const newComponent = app.component("NewComponent");
+      // Adding a new route to the new component
+      router.addRoute({ path: "/new", component: newComponent });
+
+      router.push("/new");
+    };
+    return {
+      createComponent,
+    };
+  },
+};
+</script>
+
+<style>
+</style>
+
+
+2.Expalin <Keep-alive>?
+==> a component will be unmounted when it is switched away from that component. 
+ We can force the inactive components to stay "alive" with the built-in <KeepAlive> component.
+
+3.How to scope the style in a component?
+==>When a <style> tag has the scoped attribute, its CSS will apply to elements of the current component only. 
+This is similar to the style encapsulation found in Shadow DOM.
+
+4.creatte a form with custom validation
+
+5.create a form by using VeeValidate with proper validation
+
+6.Explain code splitting and lazy loading
+==>Code splitting is where a tool splits the application bundle into multiple smaller chunks, which can then be loaded on demand or in parallel.
+
+=========================================
+
